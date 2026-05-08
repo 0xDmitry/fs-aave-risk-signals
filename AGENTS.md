@@ -38,5 +38,5 @@ This repo is for the Aave Risk Signals MVP.
 - Landing page
 - Markets list page
 - Market detail page
-- Trade panel with mock interactions
+- Market/trade section with real functionSPACE integration boundary
 - README with setup instructions

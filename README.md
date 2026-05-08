@@ -1,82 +1,109 @@
 # Aave Risk Signals
 
-**Forward yield and reserve stress signals for Aave**
+Forward yield and reserve stress signals for Aave.
 
-Aave Risk Signals is a functionSPACE-powered widget that brings forward-looking market consensus into the Aave reserve experience.
+This is a frontend-only MVP scaffold for the functionSPACE competition. It presents a small branded interface for Aave-related prediction markets and keeps all live integration work behind a narrow adapter boundary.
 
-Instead of showing only current reserve conditions, it adds live signals for where yield and reserve stress may be going next.
+## Stack
 
-The MVP focuses on two Aave Ethereum markets:
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Bun
 
-- **USDC** — 30-day average supply APY over the next 30 full UTC days
-- **WETH** — month-end utilization
+## MVP scope
 
-## Why this exists
+This competition build is intentionally narrow:
 
-DeFi interfaces are good at showing the current state of a market: APY, utilization, liquidity, and reserve status.
+- Frontend only
+- Local mock data until live Aave/functionSPACE reads are connected
+- No wallet integration
+- No auth
+- No backend
+- No database
+- No production trading logic
 
-But users often need a different layer of information:
+Product principles:
 
-- is the current yield likely to persist?
-- is reserve tightness likely to worsen?
-- are today’s conditions temporary or sustainable?
+- Minimal, sharp, and credible
+- Easy to demo
+- Prediction-market-inspired
+- Configurable from a single market metadata file
+- Simple adapter layer for future Aave data and functionSPACE SDK integration
 
-Aave Risk Signals adds that missing layer through live market-implied forward signals.
+## Run locally
 
-## What it does
+```bash
+bun install
+bun run dev
+```
 
-For each tracked reserve, the widget shows:
+Open http://localhost:3000.
 
-- the current Aave metric
-- the expected forward value
-- the most likely range
-- a simple plain-English interpretation of market consensus
+Useful checks:
 
-Users can also express a view through a simplified forecast trading interface built on top of functionSPACE’s simulated Probability Market environment.
+```bash
+bun run typecheck
+bun run build
+```
 
-## Included markets
+## App routes
 
-### 1) Aave Ethereum USDC
-**Forecast:** 30-day average supply APY over the next 30 full UTC days
+- `/` - landing page
+- `/markets` - configured markets list
+- `/markets/aave-ethereum-usdc-30d-supply-apy` - USDC market detail
+- `/markets/aave-ethereum-weth-month-end-utilization` - WETH market detail
 
-### 2) Aave Ethereum WETH
-**Forecast:** month-end utilization
+## Configured markets
 
-## Why Aave
+Project-specific market metadata lives in one file:
 
-Aave is a strong fit because its reserve surfaces already expose the core data needed for this use case, including reserve context and historical APY data.
+- `src/config/markets.ts`
 
-That makes it possible to anchor forward signals in real protocol state instead of presenting the market as an abstract forecasting layer.
+Initial functionSPACE demo market mappings:
 
-## Why functionSPACE
+- Aave Ethereum USDC 30-day supply APY: `functionSpaceMarketId: 269`
+- Aave Ethereum WETH month-end utilization: `functionSpaceMarketId: 270`
 
-functionSPACE is a strong fit because this product is about forecasting **continuous outcomes**, not yes/no events.
+Supported market config fields include:
 
-Future APY and future utilization are naturally range-based questions. functionSPACE’s Probability Market is built around beliefs expressed as curves over a numerical range, which makes it a better fit than fragmented binary markets for this kind of signal layer.
+- `id`
+- `slug`
+- `title`
+- `subtitle`
+- `description`
+- `signalType`
+- `functionSpaceMarketId`
+- `resolutionRuleSummary`
+- `status`
 
-## Scope
+## Architecture
 
-This competition build is intentionally narrow.
+- `src/app` - Next.js routes and page composition
+- `src/components` - reusable UI components
+- `src/config` - editable project market configuration
+- `src/adapters` - external provider boundaries
+- `src/services` - app-facing market read functions
+- `src/mock-data` - temporary local Aave reserve context
+- `src/types` - shared TypeScript contracts
 
-### In scope
+## functionSPACE integration
 
-- Aave reserve widget UI
-- two forward markets
-- market detail views
-- simplified forecast trading interaction
-- live consensus-driven signals
+functionSPACE-specific code lives here:
 
-### Out of scope
+- `src/adapters/functionspace.ts`
+- `src/components/FunctionSpaceMarketPanel.tsx`
 
-- rewards and leaderboard
-- real-money settlement
-- onchain resolution
-- sponsor incentive mechanics
-- multi-protocol support
-- full terminal/dashboard product
+The current adapter maps local market entries to functionSPACE demo market URLs and preserves a clear SDK boundary. Live consensus data, probability curves, embedded market UI, and simulated trading should be connected inside this adapter/component boundary when SDK or embed instructions are available.
 
-## High-level architecture
+## Aave data integration
 
-- **Aave** provides the underlying reserve context
-- **functionSPACE** provides the forecasting market primitive
-- **Aave Risk Signals** translates both into an embedded decision-support layer
+Temporary local reserve context lives here:
+
+- `src/mock-data/aave-reserves.ts`
+
+Replace this with live Aave reserve data when the MVP moves beyond local demo data.
+
+## Current blocker
+
+The app does not render live functionSPACE market UI or submit trades yet because no SDK package, embed contract, or API instructions are included in this repo. The two functionSPACE market IDs are wired into config and exposed through the adapter so live integration can be added without changing route structure.
