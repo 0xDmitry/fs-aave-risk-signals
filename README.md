@@ -74,6 +74,7 @@ Supported market config fields include:
 - `description`
 - `signalType`
 - `functionSpaceMarketId`
+- `externalMarketUrl`
 - `resolutionRuleSummary`
 - `status`
 
@@ -94,7 +95,27 @@ functionSPACE-specific code lives here:
 - `src/adapters/functionspace.ts`
 - `src/components/FunctionSpaceMarketPanel.tsx`
 
-The current adapter maps local market entries to functionSPACE demo market URLs and preserves a clear SDK boundary. Live consensus data, probability curves, embedded market UI, and simulated trading should be connected inside this adapter/component boundary when SDK or embed instructions are available.
+What is live now:
+
+- Local market config maps each project market to a real functionSPACE demo trading URL.
+- Market detail pages show Aave context and link to the live functionSPACE trading page as the current action surface.
+- The two live demo trading URLs are:
+  - `https://demo.functionspace.dev/trading/269`
+  - `https://demo.functionspace.dev/trading/270`
+
+What is still external/placeholder:
+
+- Official functionSPACE widgets are not mounted yet.
+- Native in-app functionSPACE market reads are not implemented.
+- Native in-app trade submission is not implemented.
+- Trading currently happens on the live functionSPACE demo page via external link.
+
+What is needed for full SDK integration later:
+
+- A browser-safe functionSPACE widget package, script URL, SDK, or API with concrete React exports/props.
+- Widget-backed reads for market state, probability curves, liquidity, and latest consensus.
+- Widget-backed simulated Probability Market trade submission.
+- Clear handling for any required user/session model, without adding wallet or auth until the competition integration requires it.
 
 ## Aave data integration
 
@@ -106,4 +127,4 @@ Replace this with live Aave reserve data when the MVP moves beyond local demo da
 
 ## Current blocker
 
-The app does not render live functionSPACE market UI or submit trades yet because no SDK package, embed contract, or API instructions are included in this repo. The two functionSPACE market IDs are wired into config and exposed through the adapter so live integration can be added without changing route structure.
+The app can direct users to the real functionSPACE demo trading pages, but it does not yet mount official widgets or submit trades natively because no widget package, script URL, SDK package, or API instructions are included in this repo. The two functionSPACE market IDs are wired into config and exposed through the adapter so native integration can be added without changing route structure.

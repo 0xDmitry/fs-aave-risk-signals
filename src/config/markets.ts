@@ -10,6 +10,7 @@ export const markets: MarketConfig[] = [
       "Forward market for the average USDC supply APY on Aave Ethereum over the next 30 full UTC days.",
     signalType: "forward-yield",
     functionSpaceMarketId: 269,
+    externalMarketUrl: "https://demo.functionspace.dev/trading/269",
     resolutionRuleSummary:
       "Resolves against the 30-day average Aave Ethereum USDC supply APY over the defined UTC measurement window.",
     status: "active",
@@ -24,6 +25,7 @@ export const markets: MarketConfig[] = [
       "Reserve stress market for Aave Ethereum WETH utilization at the end of the current monthly period.",
     signalType: "reserve-stress",
     functionSpaceMarketId: 270,
+    externalMarketUrl: "https://demo.functionspace.dev/trading/270",
     resolutionRuleSummary:
       "Resolves against the Aave Ethereum WETH reserve utilization observed at month end.",
     status: "active",

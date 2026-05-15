@@ -1,0 +1,3 @@
+[submodule "vendor/fs_trading_sdk"]
+	path = vendor/fs_trading_sdk
+	url = https://github.com/functionspace/fs_trading_sdk.git

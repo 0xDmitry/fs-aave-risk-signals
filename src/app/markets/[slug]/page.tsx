@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FunctionSpaceMarketPanel } from "@/components/FunctionSpaceMarketPanel";
+import { MarketDetailHeader } from "@/components/MarketDetailHeader";
 import { ReserveSnapshot } from "@/components/ReserveSnapshot";
-import { StatusBadge } from "@/components/StatusBadge";
 import { listMarkets, getMarketDetail } from "@/services/markets";
 
 type MarketDetailPageProps = {
@@ -41,34 +41,23 @@ export default async function MarketDetailPage({ params }: MarketDetailPageProps
       <Link href="/markets" className="text-sm font-semibold text-slate-500 hover:text-ink">
         Back to markets
       </Link>
-      <section className="mt-6 border-b border-line pb-8">
-        <div className="mb-5 flex flex-wrap gap-2">
-          <StatusBadge signalType={market.signalType} />
-          <StatusBadge status={market.status} />
-        </div>
-        <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
-          <div>
-            <h1 className="text-4xl font-semibold leading-tight text-ink md:text-5xl">
-              {market.title}
-            </h1>
-            <p className="mt-3 text-xl text-slate-600">{market.subtitle}</p>
-            <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600">
-              {market.description}
-            </p>
-          </div>
-          <div className="rounded-lg border border-line bg-white p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-              functionSPACE ID
-            </p>
-            <p className="mt-3 font-mono text-4xl font-semibold text-ink">
-              {market.functionSpaceMarketId}
-            </p>
-          </div>
-        </div>
-      </section>
+      <div className="mt-6">
+        <MarketDetailHeader market={market} functionSpaceMarket={functionSpaceMarket} />
+      </div>
       <div className="mt-8 grid gap-6">
-        <ReserveSnapshot reserve={reserve} />
         <FunctionSpaceMarketPanel market={market} functionSpaceMarket={functionSpaceMarket} />
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <ReserveSnapshot reserve={reserve} />
+          <section className="rounded-lg border border-line bg-white p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+              Resolution rule
+            </p>
+            <h2 className="mt-3 text-xl font-semibold text-ink">{market.subtitle}</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              {market.resolutionRuleSummary}
+            </p>
+          </section>
+        </div>
       </div>
     </main>
   );

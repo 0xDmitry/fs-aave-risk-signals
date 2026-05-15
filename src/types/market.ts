@@ -10,6 +10,7 @@ export type MarketConfig = {
   description: string;
   signalType: SignalType;
   functionSpaceMarketId: number;
+  externalMarketUrl: string;
   resolutionRuleSummary: string;
   status: MarketStatus;
   reserveSymbol: "USDC" | "WETH";
@@ -18,8 +19,10 @@ export type MarketConfig = {
 export type FunctionSpaceMarketReference = {
   provider: "functionSPACE";
   marketId: number;
-  embedUrl: string;
-  status: "configured" | "sdk-pending";
+  externalUrl: string;
+  apiBaseUrl: string;
+  integrationModel: "sdk-widgets";
+  status: "sdk-widgets-live" | "sdk-pending";
 };
 
 export type AaveReserveSnapshot = {

@@ -2,6 +2,11 @@
   "name": "fs-aave-risk-signals",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "vendor/fs_trading_sdk/packages/core",
+    "vendor/fs_trading_sdk/packages/react",
+    "vendor/fs_trading_sdk/packages/ui"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,9 +15,14 @@
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@functionspace/core": "workspace:*",
+    "@functionspace/react": "workspace:*",
+    "@functionspace/ui": "workspace:*",
     "next": "^15.3.0",
+    "rc-slider": "^11.1.9",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "recharts": "^2.10.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
