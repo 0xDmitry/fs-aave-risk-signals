@@ -6,14 +6,14 @@ import { ConsensusChart } from "@functionspace/ui/src/charts/ConsensusChart"
 import { MarketStats } from "@functionspace/ui/src/market/MarketStats"
 import { TradePanel } from "@functionspace/ui/src/trading/TradePanel"
 import { PasswordlessAuthWidget } from "@functionspace/ui/src/auth/PasswordlessAuthWidget"
-import type { RiskSignal } from "@/types/risk-signal"
 import {
   FUNCTIONSPACE_API_BASE_URL,
   FUNCTIONSPACE_DEMO_TRADING_BASE_URL,
 } from "@/config/function-space-markets"
 
 type RiskSignalTradingWidgetProps = {
-  riskSignal: RiskSignal
+  marketId: number
+  positionSelectorModes?: ("gaussian" | "range")[]
 }
 
 const widgetTheme: FSThemeInput = {
@@ -28,7 +28,8 @@ const widgetTheme: FSThemeInput = {
 }
 
 export function RiskSignalTradingWidget({
-  riskSignal,
+  marketId,
+  positionSelectorModes,
 }: RiskSignalTradingWidgetProps) {
   const [tradeError, setTradeError] = useState<string | null>(null)
 
@@ -43,7 +44,7 @@ export function RiskSignalTradingWidget({
       <section className="rounded-lg border border-ink bg-ink p-5 text-white shadow-sm">
         <div className="flex flex-col gap-4 border-b border-white/15 pb-5 lg:flex-row lg:items-start lg:justify-between">
           <a
-            href={`${FUNCTIONSPACE_DEMO_TRADING_BASE_URL}/${riskSignal.functionSpaceMarketId}`}
+            href={`${FUNCTIONSPACE_DEMO_TRADING_BASE_URL}/${marketId}`}
             target="_blank"
             rel="noreferrer"
             className="inline-flex h-11 items-center justify-center rounded bg-aave px-4 text-sm font-semibold text-ink hover:bg-white"
@@ -55,24 +56,16 @@ export function RiskSignalTradingWidget({
           <div style={{ flex: 3, minWidth: 0 }}>
             <PasswordlessAuthWidget />
           </div>
-          <MarketStats marketId={riskSignal.functionSpaceMarketId} />
+          <MarketStats marketId={marketId} />
 
           <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
             <div className="min-w-0">
-              <ConsensusChart
-                marketId={riskSignal.functionSpaceMarketId}
-                height={520}
-                zoomable
-              />
+              <ConsensusChart marketId={marketId} height={520} zoomable />
             </div>
             <div className="min-w-0 space-y-3">
               <TradePanel
-                marketId={riskSignal.functionSpaceMarketId}
-                modes={
-                  riskSignal.type === "reserve-stress"
-                    ? ["range", "gaussian"]
-                    : ["gaussian", "range"]
-                }
+                marketId={marketId}
+                modes={positionSelectorModes}
                 onError={(error) => setTradeError(error.message)}
                 onBuy={() => setTradeError(null)}
               />

@@ -16,7 +16,14 @@ export function RiskSignal({ riskSignal }: RiskSignalProps) {
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <AaveReserveInfo riskSignal={riskSignal} />
         </div>
-        <RiskSignalTradingWidget riskSignal={riskSignal} />
+        <RiskSignalTradingWidget
+          marketId={riskSignal.functionSpaceMarketId}
+          positionSelectorModes={
+            riskSignal.type === "reserve-stress"
+              ? ["range", "gaussian"]
+              : ["gaussian", "range"]
+          }
+        />
       </div>
     </AaveProvider>
   )
