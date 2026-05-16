@@ -6,6 +6,7 @@ import type { FSThemeInput } from "@functionspace/react/src/FunctionSpaceProvide
 import { ConsensusChart } from "@functionspace/ui/src/charts/ConsensusChart";
 import { MarketStats } from "@functionspace/ui/src/market/MarketStats";
 import { TradePanel } from "@functionspace/ui/src/trading/TradePanel";
+import { PasswordlessAuthWidget } from '@functionspace/ui/src/auth/PasswordlessAuthWidget';
 import type { FunctionSpaceMarketReference, MarketConfig } from "@/types/market";
 
 type FunctionSpaceSdkWidgetsProps = {
@@ -39,6 +40,9 @@ export function FunctionSpaceSdkWidgets({
       theme={widgetTheme}
     >
       <div className="space-y-4">
+        <div style={{ flex: 3, minWidth: 0 }}>
+          <PasswordlessAuthWidget />
+        </div>
         <MarketStats marketId={functionSpaceMarket.marketId} />
 
         <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
