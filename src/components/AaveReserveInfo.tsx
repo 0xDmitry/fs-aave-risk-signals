@@ -4,13 +4,13 @@ import {
   AAVE_V3_ETHEREUM_MARKET,
   RESERVE_ADDRESSES,
 } from "@/config/aave-reserves"
-import type { MarketConfig } from "@/types/market"
+import type { RiskSignal } from "@/types/risk-signal"
 
-type ReserveSnapshotProps = {
-  market: MarketConfig
+type AaveReserveInfoProps = {
+  riskSignal: RiskSignal
 }
 
-export function ReserveSnapshot({ market }: ReserveSnapshotProps) {
+export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
   const { data, loading, error } = useAaveMarket({
     address: evmAddress(AAVE_V3_ETHEREUM_MARKET),
     chainId: chainId(1),
@@ -38,7 +38,7 @@ export function ReserveSnapshot({ market }: ReserveSnapshotProps) {
 
   const reserve = data?.supplyReserves.find((reserve) => {
     const address = reserve.underlyingToken.address.toLowerCase()
-    return address === RESERVE_ADDRESSES[market.reserveSymbol].toLowerCase()
+    return address === RESERVE_ADDRESSES[riskSignal.reserveSymbol].toLowerCase()
   })
 
   if (!reserve) {
@@ -51,7 +51,7 @@ export function ReserveSnapshot({ market }: ReserveSnapshotProps) {
     )
   }
 
-  const isYieldMarket = market.signalType === "forward-yield"
+  const isYieldMarket = riskSignal.type === "forward-yield"
 
   const metricLabel = isYieldMarket
     ? "Current supply APY"
@@ -80,7 +80,7 @@ export function ReserveSnapshot({ market }: ReserveSnapshotProps) {
         <div>
           <p className="text-xs text-slate-500">Reserve</p>
           <p className="mt-1 text-xl font-semibold text-ink">
-            {market.reserveSymbol}
+            {riskSignal.reserveSymbol}
           </p>
         </div>
 

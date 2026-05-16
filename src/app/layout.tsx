@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
+
 import { Header } from "@/components/Header"
-import "./globals.css"
 import "@functionspace/ui/src/styles/base.css"
+import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Aave Risk Signals",

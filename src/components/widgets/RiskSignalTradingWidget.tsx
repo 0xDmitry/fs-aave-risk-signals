@@ -1,15 +1,19 @@
 import { useState } from "react"
+
 import { FunctionSpaceProvider } from "@functionspace/react/src/FunctionSpaceProvider"
 import type { FSThemeInput } from "@functionspace/react/src/FunctionSpaceProvider"
 import { ConsensusChart } from "@functionspace/ui/src/charts/ConsensusChart"
 import { MarketStats } from "@functionspace/ui/src/market/MarketStats"
 import { TradePanel } from "@functionspace/ui/src/trading/TradePanel"
 import { PasswordlessAuthWidget } from "@functionspace/ui/src/auth/PasswordlessAuthWidget"
-import type { MarketConfig } from "@/types/market"
-import { FUNCTIONSPACE_API_BASE_URL } from "@/config/markets"
+import type { RiskSignal } from "@/types/risk-signal"
+import {
+  FUNCTIONSPACE_API_BASE_URL,
+  FUNCTIONSPACE_DEMO_TRADING_BASE_URL,
+} from "@/config/function-space-markets"
 
-type RiskSignalsWidgetProps = {
-  market: MarketConfig
+type RiskSignalTradingWidgetProps = {
+  riskSignal: RiskSignal
 }
 
 const widgetTheme: FSThemeInput = {
@@ -23,7 +27,9 @@ const widgetTheme: FSThemeInput = {
   border: "#293241",
 }
 
-export function RiskSignalsWidget({ market }: RiskSignalsWidgetProps) {
+export function RiskSignalTradingWidget({
+  riskSignal,
+}: RiskSignalTradingWidgetProps) {
   const [tradeError, setTradeError] = useState<string | null>(null)
 
   return (
@@ -37,7 +43,7 @@ export function RiskSignalsWidget({ market }: RiskSignalsWidgetProps) {
       <section className="rounded-lg border border-ink bg-ink p-5 text-white shadow-sm">
         <div className="flex flex-col gap-4 border-b border-white/15 pb-5 lg:flex-row lg:items-start lg:justify-between">
           <a
-            href={market.externalMarketUrl}
+            href={`${FUNCTIONSPACE_DEMO_TRADING_BASE_URL}/${riskSignal.functionSpaceMarketId}`}
             target="_blank"
             rel="noreferrer"
             className="inline-flex h-11 items-center justify-center rounded bg-aave px-4 text-sm font-semibold text-ink hover:bg-white"
@@ -49,21 +55,21 @@ export function RiskSignalsWidget({ market }: RiskSignalsWidgetProps) {
           <div style={{ flex: 3, minWidth: 0 }}>
             <PasswordlessAuthWidget />
           </div>
-          <MarketStats marketId={market.functionSpaceMarketId} />
+          <MarketStats marketId={riskSignal.functionSpaceMarketId} />
 
           <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
             <div className="min-w-0">
               <ConsensusChart
-                marketId={market.functionSpaceMarketId}
+                marketId={riskSignal.functionSpaceMarketId}
                 height={520}
                 zoomable
               />
             </div>
             <div className="min-w-0 space-y-3">
               <TradePanel
-                marketId={market.functionSpaceMarketId}
+                marketId={riskSignal.functionSpaceMarketId}
                 modes={
-                  market.signalType === "reserve-stress"
+                  riskSignal.type === "reserve-stress"
                     ? ["range", "gaussian"]
                     : ["gaussian", "range"]
                 }

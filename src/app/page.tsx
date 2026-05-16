@@ -1,9 +1,11 @@
-import { MarketCard } from "@/components/MarketCard"
-import { getMarkets } from "@/services/markets"
+"use client"
+
+import Link from "next/link"
+
+import { RiskSignalCardWidget } from "@/components/widgets/RiskSignalCardWidget"
+import { riskSignals } from "@/config/risk-signals"
 
 export default function HomePage() {
-  const markets = getMarkets()
-
   return (
     <main>
       <section className="market-grid border-b border-line bg-white">
@@ -29,13 +31,19 @@ export default function HomePage() {
               </a>
             </div>
           </div>
-        </div>
-      </section>
-      <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="grid gap-4 md:grid-cols-2">
-          {markets.map((market) => (
-            <MarketCard key={market.id} market={market} />
-          ))}
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {riskSignals.map((riskSignal) => (
+              <Link
+                key={riskSignal.functionSpaceMarketId}
+                href={`/risk-signals/${riskSignal.slug}`}
+              >
+                <RiskSignalCardWidget
+                  marketId={riskSignal.functionSpaceMarketId}
+                />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </main>
