@@ -1,10 +1,10 @@
-import type { FunctionSpaceMarketReference, MarketConfig } from "@/types/market";
-import { StatusBadge } from "@/components/StatusBadge";
+import type { FunctionSpaceMarketReference, MarketConfig } from "@/types/market"
+import { StatusBadge } from "@/components/StatusBadge"
 
 type MarketDetailHeaderProps = {
-  market: MarketConfig;
-  functionSpaceMarket: FunctionSpaceMarketReference;
-};
+  market: MarketConfig
+  functionSpaceMarket: FunctionSpaceMarketReference
+}
 
 export function MarketDetailHeader({
   market,
@@ -56,5 +56,5 @@ export function MarketDetailHeader({
         </aside>
       </div>
     </section>
-  );
+  )
 }

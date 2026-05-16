@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export function Header() {
   return (
@@ -9,16 +9,15 @@ export function Header() {
             AR
           </span>
           <span>
-            <span className="block text-sm font-semibold text-ink">Aave Risk Signals</span>
-            <span className="block text-xs text-slate-500">functionSPACE demo</span>
+            <span className="block text-sm font-semibold text-ink">
+              Aave Risk Signals
+            </span>
+            <span className="block text-xs text-slate-500">
+              functionSPACE demo
+            </span>
           </span>
         </Link>
-        <nav className="flex items-center gap-4 text-sm font-medium text-slate-600">
-          <Link href="/markets" className="hover:text-ink">
-            Markets
-          </Link>
-        </nav>
       </div>
     </header>
-  );
+  )
 }

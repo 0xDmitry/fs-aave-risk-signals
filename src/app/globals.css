@@ -14,7 +14,11 @@
 body {
   margin: 0;
   background:
-    linear-gradient(180deg, rgba(46, 186, 198, 0.08), rgba(247, 248, 250, 0) 360px),
+    linear-gradient(
+      180deg,
+      rgba(46, 186, 198, 0.08),
+      rgba(247, 248, 250, 0) 360px
+    ),
     #f7f8fa;
   color: #101418;
 }

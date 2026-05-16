@@ -3,12 +3,14 @@
 This repo is for the Aave Risk Signals MVP.
 
 ## Build goals
+
 - Use Next.js + TypeScript + Tailwind
 - Keep the app frontend-only for now
 - Use mock local data
 - Keep architecture simple and modular
 
 ## Architecture rules
+
 - Separate:
   - UI components
   - mock data
@@ -20,6 +22,7 @@ This repo is for the Aave Risk Signals MVP.
 - Add clear TODO comments for future Aave data ingestion points
 
 ## Avoid
+
 - No auth
 - No backend
 - No database
@@ -29,12 +32,14 @@ This repo is for the Aave Risk Signals MVP.
 - No overengineering
 
 ## UX
+
 - Minimal
 - Sharp
 - Credible
 - Prediction-market-inspired
 
 ## Deliverables
+
 - Landing page
 - Markets list page
 - Market detail page

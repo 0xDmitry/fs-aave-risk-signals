@@ -1,10 +1,10 @@
-import Link from "next/link";
-import type { MarketConfig } from "@/types/market";
-import { StatusBadge } from "@/components/StatusBadge";
+import Link from "next/link"
+import type { MarketConfig } from "@/types/market"
+import { StatusBadge } from "@/components/StatusBadge"
 
 type MarketCardProps = {
-  market: MarketConfig;
-};
+  market: MarketConfig
+}
 
 export function MarketCard({ market }: MarketCardProps) {
   return (
@@ -21,12 +21,18 @@ export function MarketCard({ market }: MarketCardProps) {
           <h3 className="text-lg font-semibold text-ink">{market.title}</h3>
           <p className="text-sm text-slate-500">{market.subtitle}</p>
         </div>
-        <p className="min-h-12 text-sm leading-6 text-slate-600">{market.description}</p>
+        <p className="min-h-12 text-sm leading-6 text-slate-600">
+          {market.description}
+        </p>
       </div>
       <div className="mt-6 flex items-center justify-between border-t border-line pt-4 text-sm">
-        <span className="font-mono text-slate-500">functionSPACE #{market.functionSpaceMarketId}</span>
-        <span className="font-semibold text-ink group-hover:text-aave">Open</span>
+        <span className="font-mono text-slate-500">
+          functionSPACE #{market.functionSpaceMarketId}
+        </span>
+        <span className="font-semibold text-ink group-hover:text-aave">
+          Open
+        </span>
       </div>
     </Link>
-  );
+  )
 }

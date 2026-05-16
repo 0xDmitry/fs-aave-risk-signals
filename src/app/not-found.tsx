@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export default function NotFound() {
   return (
@@ -7,7 +7,9 @@ export default function NotFound() {
         Not found
       </p>
       <h1 className="mt-3 text-4xl font-semibold text-ink">Market not found</h1>
-      <p className="mt-4 text-slate-600">The requested market is not configured in this MVP.</p>
+      <p className="mt-4 text-slate-600">
+        The requested market is not configured in this MVP.
+      </p>
       <Link
         href="/markets"
         className="mt-8 inline-flex h-11 items-center rounded bg-ink px-5 text-sm font-semibold text-white hover:bg-slate-800"
@@ -15,5 +17,5 @@ export default function NotFound() {
         Back to markets
       </Link>
     </main>
-  );
+  )
 }

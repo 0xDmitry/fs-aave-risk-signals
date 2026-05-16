@@ -1,14 +1,15 @@
-import type { FunctionSpaceMarketReference, MarketConfig } from "@/types/market";
+import type { FunctionSpaceMarketReference, MarketConfig } from "@/types/market"
 
-const FUNCTIONSPACE_DEMO_TRADING_BASE_URL = "https://demo.functionspace.dev/trading";
-const FUNCTIONSPACE_API_BASE_URL = "https://fs-engine-api.onrender.com";
+const FUNCTIONSPACE_DEMO_TRADING_BASE_URL =
+  "https://demo.functionspace.dev/trading"
+const FUNCTIONSPACE_API_BASE_URL = "https://fs-engine-api.onrender.com"
 
 export function createFunctionSpaceMarketReference(
   market: Pick<MarketConfig, "functionSpaceMarketId" | "externalMarketUrl">,
 ): FunctionSpaceMarketReference {
   const externalUrl =
     market.externalMarketUrl ??
-    `${FUNCTIONSPACE_DEMO_TRADING_BASE_URL}/${market.functionSpaceMarketId}`;
+    `${FUNCTIONSPACE_DEMO_TRADING_BASE_URL}/${market.functionSpaceMarketId}`
 
   return {
     provider: "functionSPACE",
@@ -17,7 +18,7 @@ export function createFunctionSpaceMarketReference(
     apiBaseUrl: FUNCTIONSPACE_API_BASE_URL,
     integrationModel: "sdk-widgets",
     status: "sdk-widgets-live",
-  };
+  }
 }
 
 export async function getFunctionSpaceMarketReference(
@@ -25,7 +26,7 @@ export async function getFunctionSpaceMarketReference(
 ) {
   // TODO[functionSPACE SDK]: Move this base URL into environment config when the
   // competition deployment target is finalized.
-  return createFunctionSpaceMarketReference(market);
+  return createFunctionSpaceMarketReference(market)
 }
 
 export async function connectFunctionSpaceTrading() {
@@ -35,5 +36,5 @@ export async function connectFunctionSpaceTrading() {
     enabled: false,
     reason:
       "functionSPACE widgets are mounted in guest mode; authenticated trade submission is not configured by this app.",
-  };
+  }
 }
