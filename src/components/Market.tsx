@@ -1,7 +1,7 @@
 "use client"
 
 import { AaveProvider } from "@/providers/AaveProvider"
-import { FSAaveRiskSignalsWidget } from "@/components/FSAaveRiskSignalsWidget"
+import { RiskSignalsWidget } from "@/components/RiskSignalsWidget"
 import { ReserveSnapshot } from "@/components/ReserveSnapshot"
 import type { MarketConfig } from "@/types/market"
 
@@ -16,7 +16,7 @@ export function Market({ market }: MarketProps) {
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <ReserveSnapshot market={market} />
         </div>
-        <FSAaveRiskSignalsWidget market={market} />
+        <RiskSignalsWidget market={market} />
       </div>
     </AaveProvider>
   )

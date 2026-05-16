@@ -8,7 +8,7 @@ import { PasswordlessAuthWidget } from "@functionspace/ui/src/auth/PasswordlessA
 import type { MarketConfig } from "@/types/market"
 import { FUNCTIONSPACE_API_BASE_URL } from "@/config/markets"
 
-type FSAaveRiskSignalsWidgetProps = {
+type RiskSignalsWidgetProps = {
   market: MarketConfig
 }
 
@@ -23,9 +23,7 @@ const widgetTheme: FSThemeInput = {
   border: "#293241",
 }
 
-export function FSAaveRiskSignalsWidget({
-  market,
-}: FSAaveRiskSignalsWidgetProps) {
+export function RiskSignalsWidget({ market }: RiskSignalsWidgetProps) {
   const [tradeError, setTradeError] = useState<string | null>(null)
 
   return (
