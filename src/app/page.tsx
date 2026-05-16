@@ -1,9 +1,8 @@
-import Link from "next/link"
 import { MarketCard } from "@/components/MarketCard"
-import { listMarkets } from "@/services/markets"
+import { getMarkets } from "@/services/markets"
 
 export default function HomePage() {
-  const markets = listMarkets()
+  const markets = getMarkets()
 
   return (
     <main>

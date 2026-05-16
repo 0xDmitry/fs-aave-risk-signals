@@ -7,11 +7,11 @@ import { ConsensusChart } from "@functionspace/ui/src/charts/ConsensusChart"
 import { MarketStats } from "@functionspace/ui/src/market/MarketStats"
 import { TradePanel } from "@functionspace/ui/src/trading/TradePanel"
 import { PasswordlessAuthWidget } from "@functionspace/ui/src/auth/PasswordlessAuthWidget"
-import type { FunctionSpaceMarketReference, MarketConfig } from "@/types/market"
+import type { MarketConfig } from "@/types/market"
+import { FUNCTIONSPACE_API_BASE_URL } from "@/config/markets"
 
-type FunctionSpaceMarketPanelProps = {
+type FSAaveRiskSignalsWidgetProps = {
   market: MarketConfig
-  functionSpaceMarket: FunctionSpaceMarketReference
 }
 
 const widgetTheme: FSThemeInput = {
@@ -25,16 +25,15 @@ const widgetTheme: FSThemeInput = {
   border: "#293241",
 }
 
-export function FunctionSpaceMarketPanel({
+export function FSAaveRiskSignalsWidget({
   market,
-  functionSpaceMarket,
-}: FunctionSpaceMarketPanelProps) {
+}: FSAaveRiskSignalsWidgetProps) {
   const [tradeError, setTradeError] = useState<string | null>(null)
 
   return (
     <FunctionSpaceProvider
       config={{
-        baseUrl: functionSpaceMarket.apiBaseUrl,
+        baseUrl: FUNCTIONSPACE_API_BASE_URL,
         autoAuthenticate: false,
       }}
       theme={widgetTheme}
@@ -42,7 +41,7 @@ export function FunctionSpaceMarketPanel({
       <section className="rounded-lg border border-ink bg-ink p-5 text-white shadow-sm">
         <div className="flex flex-col gap-4 border-b border-white/15 pb-5 lg:flex-row lg:items-start lg:justify-between">
           <a
-            href={functionSpaceMarket.externalUrl}
+            href={market.externalMarketUrl}
             target="_blank"
             rel="noreferrer"
             className="inline-flex h-11 items-center justify-center rounded bg-aave px-4 text-sm font-semibold text-ink hover:bg-white"
@@ -54,22 +53,22 @@ export function FunctionSpaceMarketPanel({
           <div style={{ flex: 3, minWidth: 0 }}>
             <PasswordlessAuthWidget />
           </div>
-          <MarketStats marketId={functionSpaceMarket.marketId} />
+          <MarketStats marketId={market.functionSpaceMarketId} />
 
           <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
             <div className="min-w-0">
               <ConsensusChart
-                marketId={functionSpaceMarket.marketId}
+                marketId={market.functionSpaceMarketId}
                 height={520}
                 zoomable
               />
             </div>
             <div className="min-w-0 space-y-3">
               <TradePanel
-                marketId={functionSpaceMarket.marketId}
+                marketId={market.functionSpaceMarketId}
                 modes={
                   market.signalType === "reserve-stress"
-                    ? ["range"]
+                    ? ["range", "gaussian"]
                     : ["gaussian", "range"]
                 }
                 onError={(error) => setTradeError(error.message)}

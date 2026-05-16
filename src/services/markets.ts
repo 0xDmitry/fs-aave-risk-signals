@@ -1,8 +1,7 @@
-import { getFunctionSpaceMarketReference } from "@/adapters/functionspace"
 import { aaveReserveSnapshots } from "@/mock-data/aave-reserves"
 import { getMarketBySlug, markets } from "@/config/markets"
 
-export function listMarkets() {
+export function getMarkets() {
   return markets
 }
 
@@ -16,6 +15,5 @@ export async function getMarketDetail(slug: string) {
   return {
     market,
     reserve: aaveReserveSnapshots[market.reserveSymbol],
-    functionSpaceMarket: await getFunctionSpaceMarketReference(market),
   }
 }

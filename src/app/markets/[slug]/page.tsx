@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
-import { FunctionSpaceMarketPanel } from "@/components/FunctionSpaceMarketPanel"
+import { FSAaveRiskSignalsWidget } from "@/components/FSAaveRiskSignalsWidget"
 import { ReserveSnapshot } from "@/components/ReserveSnapshot"
-import { listMarkets, getMarketDetail } from "@/services/markets"
+import { getMarkets, getMarketDetail } from "@/services/markets"
 
 type MarketDetailPageProps = {
   params: Promise<{
@@ -10,7 +10,7 @@ type MarketDetailPageProps = {
 }
 
 export function generateStaticParams() {
-  return listMarkets().map((market) => ({
+  return getMarkets().map((market) => ({
     slug: market.slug,
   }))
 }
@@ -36,7 +36,7 @@ export default async function MarketDetailPage({
     notFound()
   }
 
-  const { market, reserve, functionSpaceMarket } = detail
+  const { market, reserve } = detail
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-10">
@@ -44,10 +44,7 @@ export default async function MarketDetailPage({
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <ReserveSnapshot reserve={reserve} />
         </div>
-        <FunctionSpaceMarketPanel
-          market={market}
-          functionSpaceMarket={functionSpaceMarket}
-        />
+        <FSAaveRiskSignalsWidget market={market} />
       </div>
     </main>
   )

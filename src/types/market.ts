@@ -15,15 +15,6 @@ export type MarketConfig = {
   status: MarketStatus
 }
 
-export type FunctionSpaceMarketReference = {
-  provider: "functionSPACE"
-  marketId: number
-  externalUrl: string
-  apiBaseUrl: string
-  integrationModel: "sdk-widgets"
-  status: "sdk-widgets-live" | "sdk-pending"
-}
-
 export type AaveReserveSnapshot = {
   symbol: string
   network: string
