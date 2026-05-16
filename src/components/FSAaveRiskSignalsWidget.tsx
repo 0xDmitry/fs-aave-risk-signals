@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { FunctionSpaceProvider } from "@functionspace/react/src/FunctionSpaceProvider"
 import type { FSThemeInput } from "@functionspace/react/src/FunctionSpaceProvider"
