@@ -7,7 +7,7 @@ import { riskSignals } from "@/config/risk-signals"
 
 export function RiskSignals() {
   return (
-    <section className="bg-slate-50">
+    <section className="bg-panel">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal">
@@ -18,7 +18,7 @@ export function RiskSignals() {
             Two forward Aave V3 risk markets
           </h2>
 
-          <p className="mt-4 text-base leading-7 text-slate-600">
+          <p className="text-ink-muted mt-4 text-base leading-7">
             Aave Risk Signals is a functionSPACE competition demo that turns
             Aave V3 reserve risk into two forecastable markets. Instead of
             showing only current protocol data, it asks users to express forward

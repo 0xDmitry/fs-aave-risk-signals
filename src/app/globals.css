@@ -4,32 +4,29 @@
 
 :root {
   color-scheme: light;
-  background: #f7f8fa;
-}
-
-* {
-  box-sizing: border-box;
+  background: #f1f1f3;
 }
 
 body {
   margin: 0;
   background:
-    linear-gradient(
-      180deg,
-      rgba(46, 186, 198, 0.08),
-      rgba(247, 248, 250, 0) 360px
+    radial-gradient(
+      circle at top left,
+      rgba(182, 80, 158, 0.12),
+      transparent 32rem
     ),
-    #f7f8fa;
-  color: #101418;
-}
-
-a {
-  text-decoration: none;
+    radial-gradient(
+      circle at top right,
+      rgba(46, 186, 198, 0.12),
+      transparent 34rem
+    ),
+    #f1f1f3;
+  color: #303549;
 }
 
 .market-grid {
   background-image:
-    linear-gradient(rgba(16, 20, 24, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 20, 24, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(48, 53, 73, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(48, 53, 73, 0.06) 1px, transparent 1px);
   background-size: 28px 28px;
 }

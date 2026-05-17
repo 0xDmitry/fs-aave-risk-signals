@@ -1,9 +1,9 @@
 export function Footer() {
   return (
-    <footer className="border-t border-line/80 bg-white/80 backdrop-blur-xl">
+    <footer className="bg-paper/80 border-t border-line/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-end gap-3 text-center sm:flex-row sm:text-left">
-          <div className="text-sm text-slate-500">
+          <div className="text-muted text-sm">
             made by{" "}
             <a
               href="https://x.com/0xDmitry"

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import "@functionspace/ui/src/styles/base.css"
 
 import { Header } from "@/components/Header"
@@ -10,6 +11,11 @@ export const metadata: Metadata = {
   description: "Forward yield and reserve stress signals for Aave.",
 }
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -17,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
+      <body className={`${inter.variable} font-sans antialiased`}>
         <Header />
         {children}
         <Footer />

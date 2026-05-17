@@ -1,6 +1,6 @@
 export function Hero() {
   return (
-    <section className="border-b border-line bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_34%),linear-gradient(to_bottom,#ffffff,#f8fafc)]">
+    <section className="border-b border-line bg-[radial-gradient(circle_at_top_left,rgba(182,80,158,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(46,186,198,0.14),transparent_38%),linear-gradient(to_bottom,#FFFFFF,#F1F1F3)]">
       <div className="mx-auto flex min-h-[520px] max-w-7xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal sm:text-sm">
           functionSPACE competition demo
@@ -10,7 +10,7 @@ export function Hero() {
           Aave Risk Signals
         </h1>
 
-        <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+        <p className="text-ink-muted mt-6 max-w-2xl text-base leading-7 sm:text-lg sm:leading-8">
           Forward yield and reserve stress signals for Aave V3
         </p>
 
@@ -19,7 +19,7 @@ export function Hero() {
             href="https://ecosystem.functionspace.dev/competition"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-11 items-center justify-center rounded-lg border border-line bg-white px-5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-ink hover:shadow-md"
+            className="bg-paper hover:border-header inline-flex h-11 items-center justify-center rounded-lg border border-line px-5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             View Competition
           </a>
@@ -28,7 +28,7 @@ export function Hero() {
             href="https://demo.functionspace.dev"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-11 items-center justify-center rounded-lg border border-line bg-white px-5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-ink hover:shadow-md"
+            className="bg-paper hover:border-header inline-flex h-11 items-center justify-center rounded-lg border border-line px-5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             Demo Trading
           </a>

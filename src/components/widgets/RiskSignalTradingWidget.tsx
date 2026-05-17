@@ -46,7 +46,7 @@ function RiskSignalTradingWidgetInner({
   const isSignedIn = Boolean(isAuthenticated || user)
 
   return (
-    <section className="rounded-xl border border-ink bg-ink p-4 text-white shadow-sm sm:p-5">
+    <section className="bg-header border-header rounded-xl border p-4 text-white shadow-sm sm:p-5">
       <div className="space-y-5">
         <div className="flex flex-col gap-4 border-b border-white/15 pb-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0 flex-1">
@@ -57,7 +57,7 @@ function RiskSignalTradingWidgetInner({
             href={`${FUNCTIONSPACE_DEMO_TRADING_BASE_URL}/${marketId}`}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-11 shrink-0 items-center justify-center rounded-lg bg-aave px-4 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-white"
+            className="hover:bg-paper inline-flex h-11 shrink-0 items-center justify-center rounded-lg bg-aave px-4 text-sm font-semibold text-ink transition hover:-translate-y-0.5"
           >
             Open live market
           </a>

@@ -18,17 +18,15 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
 
   if (loading) {
     return (
-      <section className="rounded-lg border border-line bg-white p-5">
-        <p className="text-sm text-slate-500">
-          Loading live Aave reserve data...
-        </p>
+      <section className="bg-paper rounded-lg border border-line p-5">
+        <p className="text-muted text-sm">Loading live Aave reserve data...</p>
       </section>
     )
   }
 
   if (error) {
     return (
-      <section className="rounded-lg border border-line bg-white p-5">
+      <section className="bg-paper rounded-lg border border-line p-5">
         <p className="text-sm text-red-600">
           Failed to load Aave reserve data.
         </p>
@@ -43,8 +41,8 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
 
   if (!reserve) {
     return (
-      <section className="rounded-lg border border-line bg-white p-5">
-        <p className="text-sm text-slate-500">
+      <section className="bg-paper rounded-lg border border-line p-5">
+        <p className="text-muted text-sm">
           Reserve not found in Aave Ethereum market.
         </p>
       </section>
@@ -71,31 +69,31 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
     : "Live Aave V3 Ethereum WETH utilization. This is the current reserve tightness signal behind the reserve stress market."
 
   return (
-    <section className="rounded-lg border border-line bg-white p-5">
-      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+    <section className="bg-paper rounded-lg border border-line p-5">
+      <p className="text-muted text-xs font-semibold uppercase tracking-[0.12em]">
         Live Aave reserve context
       </p>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-3">
         <div>
-          <p className="text-xs text-slate-500">Reserve</p>
+          <p className="text-muted text-xs">Reserve</p>
           <p className="mt-1 text-xl font-semibold text-ink">
             {riskSignal.reserveSymbol}
           </p>
         </div>
 
         <div>
-          <p className="text-xs text-slate-500">Network</p>
+          <p className="text-muted text-xs">Network</p>
           <p className="mt-1 text-xl font-semibold text-ink">Ethereum</p>
         </div>
 
         <div>
-          <p className="text-xs text-slate-500">{metricLabel}</p>
+          <p className="text-muted text-xs">{metricLabel}</p>
           <p className="mt-1 text-xl font-semibold text-ink">{metricValue}</p>
         </div>
       </div>
 
-      <p className="mt-4 text-sm leading-6 text-slate-600">{context}</p>
+      <p className="text-ink-muted mt-4 text-sm leading-6">{context}</p>
     </section>
   )
 }
