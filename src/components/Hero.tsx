@@ -19,7 +19,7 @@ export function Hero() {
             href="https://ecosystem.functionspace.dev/competition"
             target="_blank"
             rel="noreferrer"
-            className="bg-paper hover:border-header inline-flex h-11 items-center justify-center rounded-lg border border-line px-5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            className="bg-paper hover:border-header inline-flex h-11 items-center justify-center rounded-xl border border-line px-5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             View Competition
           </a>
@@ -28,7 +28,7 @@ export function Hero() {
             href="https://demo.functionspace.dev"
             target="_blank"
             rel="noreferrer"
-            className="bg-paper hover:border-header inline-flex h-11 items-center justify-center rounded-lg border border-line px-5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            className="bg-paper hover:border-header inline-flex h-11 items-center justify-center rounded-xl border border-line px-5 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             Demo Trading
           </a>

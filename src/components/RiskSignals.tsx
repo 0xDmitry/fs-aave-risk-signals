@@ -26,12 +26,12 @@ export function RiskSignals() {
           </p>
         </div>
 
-        <div className="mx-auto mt-10 grid w-full max-w-5xl gap-4 sm:grid-cols-2 lg:gap-5">
+        <div className="flex-items-stretch mx-auto mt-10 flex w-full max-w-6xl flex-col gap-4 sm:flex-row sm:flex-wrap lg:gap-5">
           {riskSignals.map((riskSignal) => (
             <Link
               key={riskSignal.functionSpaceMarketId}
               href={`/risk-signals/${riskSignal.slug}`}
-              className="block outline-none transition hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
+              className="flex-items-stretch flex w-full basis-[calc(50%-1rem)] outline-none transition hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
             >
               <RiskSignalCardWidget
                 marketId={riskSignal.functionSpaceMarketId}

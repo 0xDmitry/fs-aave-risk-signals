@@ -53,14 +53,14 @@ function RiskSignalTrading({
             href={`${FUNCTIONSPACE_DEMO_TRADING_BASE_URL}/${marketId}`}
             target="_blank"
             rel="noreferrer"
-            className="hover:bg-paper inline-flex h-11 shrink-0 items-center justify-center rounded-lg bg-aave px-4 text-sm font-semibold text-ink transition hover:-translate-y-0.5"
+            className="fs-open-market-btn"
           >
-            Open live market
+            Open Live Market
           </a>
         </div>
 
-        <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:items-start">
-          <div className="min-w-0 overflow-hidden">
+        <div className="lg:flex-items-stretch grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)]">
+          <div className="flex-items-stretch flex min-w-0 overflow-hidden">
             <ConsensusChart marketId={marketId} height={520} zoomable />
           </div>
 
@@ -81,7 +81,7 @@ function RiskSignalTrading({
                 />
 
                 {tradeError ? (
-                  <div className="rounded-lg border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-100">
+                  <div className="rounded-xl border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-100">
                     {tradeError}
                   </div>
                 ) : null}

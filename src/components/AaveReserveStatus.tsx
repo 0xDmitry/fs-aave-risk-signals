@@ -38,7 +38,7 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
 
   if (marketLoading || supplyApyHistoryLoading) {
     return (
-      <section className="bg-paper rounded-lg border border-line p-5">
+      <section className="bg-paper rounded-xl border border-line p-5">
         <p className="text-muted text-sm">
           Loading live Aave V3 reserve data...
         </p>
@@ -48,7 +48,7 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
 
   if (marketError || supplyApyHistoryError) {
     return (
-      <section className="bg-paper rounded-lg border border-line p-5">
+      <section className="bg-paper rounded-xl border border-line p-5">
         <p className="text-sm text-red-600">
           Failed to load Aave V3 reserve data.
         </p>
@@ -63,7 +63,7 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
 
   if (!reserve) {
     return (
-      <section className="bg-paper rounded-lg border border-line p-5">
+      <section className="bg-paper rounded-xl border border-line p-5">
         <p className="text-muted text-sm">
           Reserve not found in Aave V3 Ethereum market.
         </p>
@@ -88,11 +88,11 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
     : `${reserve.borrowInfo?.utilizationRate.formatted} %`
 
   const description = isYieldMarket
-    ? "Live Aave V3 Ethereum USDC 30-Day Average Supply APY (May 8 - June 6 2026)."
-    : "Live Aave V3 Ethereum WETH Reserve Utilization."
+    ? "Live Aave V3 Ethereum USDC 30-Day Average Supply APY (May 8 - June 6 2026)"
+    : "Live Aave V3 Ethereum WETH Reserve Utilization"
 
   return (
-    <section className="bg-paper rounded-lg border border-line p-5">
+    <section className="bg-paper rounded-xl border border-line p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <p className="text-muted text-xs font-semibold uppercase tracking-[0.12em]">
           Live Aave V3 reserve status
@@ -101,7 +101,7 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
           href={riskSignal.reservePageUrl}
           target="_blank"
           rel="noreferrer"
-          className="text-muted text-xs font-semibold uppercase tracking-[0.12em] transition hover:text-ink"
+          className="text-ink-muted text-xs font-semibold uppercase tracking-[0.12em] transition hover:text-ink"
         >
           View on Aave V3 ↗
         </a>
