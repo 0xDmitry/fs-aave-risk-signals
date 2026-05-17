@@ -42,3 +42,12 @@ body {
   color: white;
   border: none;
 }
+
+.fs-risk-signal-cards-skeleton {
+  display: inline-block;
+  height: 403px;
+  width: 560px;
+  background: var(--fs-border);
+  border-radius: 0.75rem;
+  animation: fs-pulse 1.5s ease-in-out infinite;
+}

@@ -9,7 +9,7 @@ export function RiskSignals() {
   return (
     <section className="bg-panel">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal">
             markets
           </p>
@@ -31,7 +31,7 @@ export function RiskSignals() {
             <Link
               key={riskSignal.functionSpaceMarketId}
               href={`/risk-signals/${riskSignal.slug}`}
-              className="flex-items-stretch flex w-full basis-[calc(50%-1rem)] outline-none transition hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
+              className="flex-items-stretch flex min-h-[403px] w-full basis-[calc(50%-1rem)] outline-none transition hover:-translate-y-1"
             >
               <RiskSignalCardWidget
                 marketId={riskSignal.functionSpaceMarketId}

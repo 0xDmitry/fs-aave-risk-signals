@@ -25,7 +25,7 @@ function RiskSignalCard({ marketId }: RiskSignalCardProps) {
   return (
     <div>
       {loading ? (
-        <span className="fs-skeleton" />
+        <span className="fs-risk-signal-cards-skeleton" />
       ) : error ? (
         <span style={{ color: "var(--fs-negative)", fontSize: "0.75rem" }}>
           Error
