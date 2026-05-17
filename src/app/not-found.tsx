@@ -8,7 +8,7 @@ export default function NotFound() {
         Risk signal not found
       </h1>
       <p className="mt-4 text-slate-600">
-        The requested risk signal doesn't exist.
+        {"The requested risk signal doesn't exist."}
       </p>
     </main>
   )
