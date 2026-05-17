@@ -1,38 +1,25 @@
 import { useState } from "react"
-
-import { FunctionSpaceProvider } from "@functionspace/react/src/FunctionSpaceProvider"
-import type { FSThemeInput } from "@functionspace/react/src/FunctionSpaceProvider"
+import { FunctionSpaceProvider, useAuth } from "@functionspace/react"
 import { ConsensusChart } from "@functionspace/ui/src/charts/ConsensusChart"
 import { MarketStats } from "@functionspace/ui/src/market/MarketStats"
 import { TradePanel } from "@functionspace/ui/src/trading/TradePanel"
 import { PasswordlessAuthWidget } from "@functionspace/ui/src/auth/PasswordlessAuthWidget"
+
 import {
   FUNCTIONSPACE_API_BASE_URL,
   FUNCTIONSPACE_DEMO_TRADING_BASE_URL,
 } from "@/config/function-space-markets"
+import { widgetTheme } from "@/theme/widget-theme"
 
 type RiskSignalTradingWidgetProps = {
   marketId: number
   positionSelectorModes?: ("gaussian" | "range")[]
 }
 
-const widgetTheme: FSThemeInput = {
-  preset: "fs-dark",
-  primary: "#2ebac6",
-  accent: "#5856d6",
-  background: "#101418",
-  surface: "#151b22",
-  text: "#f8fafc",
-  textSecondary: "#94a3b8",
-  border: "#293241",
-}
-
 export function RiskSignalTradingWidget({
   marketId,
   positionSelectorModes,
 }: RiskSignalTradingWidgetProps) {
-  const [tradeError, setTradeError] = useState<string | null>(null)
-
   return (
     <FunctionSpaceProvider
       config={{
@@ -41,43 +28,68 @@ export function RiskSignalTradingWidget({
       }}
       theme={widgetTheme}
     >
-      <section className="rounded-lg border border-ink bg-ink p-5 text-white shadow-sm">
-        <div className="flex flex-col gap-4 border-b border-white/15 pb-5 lg:flex-row lg:items-start lg:justify-between">
+      <RiskSignalTradingWidgetInner
+        marketId={marketId}
+        positionSelectorModes={positionSelectorModes}
+      />
+    </FunctionSpaceProvider>
+  )
+}
+
+function RiskSignalTradingWidgetInner({
+  marketId,
+  positionSelectorModes,
+}: RiskSignalTradingWidgetProps) {
+  const [tradeError, setTradeError] = useState<string | null>(null)
+
+  const { user, isAuthenticated } = useAuth()
+  const isSignedIn = Boolean(isAuthenticated || user)
+
+  return (
+    <section className="rounded-xl border border-ink bg-ink p-4 text-white shadow-sm sm:p-5">
+      <div className="space-y-5">
+        <div className="flex flex-col gap-4 border-b border-white/15 pb-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0 flex-1">
+            <MarketStats marketId={marketId} />
+          </div>
+
           <a
             href={`${FUNCTIONSPACE_DEMO_TRADING_BASE_URL}/${marketId}`}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-11 items-center justify-center rounded bg-aave px-4 text-sm font-semibold text-ink hover:bg-white"
+            className="inline-flex h-11 shrink-0 items-center justify-center rounded-lg bg-aave px-4 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-white"
           >
             Open live market
           </a>
         </div>
-        <div className="space-y-4">
-          <div style={{ flex: 3, minWidth: 0 }}>
-            <PasswordlessAuthWidget />
-          </div>
-          <MarketStats marketId={marketId} />
 
-          <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
-            <div className="min-w-0">
-              <ConsensusChart marketId={marketId} height={520} zoomable />
-            </div>
-            <div className="min-w-0 space-y-3">
-              <TradePanel
-                marketId={marketId}
-                modes={positionSelectorModes}
-                onError={(error) => setTradeError(error.message)}
-                onBuy={() => setTradeError(null)}
-              />
-              {tradeError ? (
-                <div className="rounded border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-100">
-                  {tradeError}
-                </div>
-              ) : null}
-            </div>
+        <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:items-start">
+          <div className="min-w-0 overflow-hidden">
+            <ConsensusChart marketId={marketId} height={520} zoomable />
           </div>
+
+          <aside className="min-w-0 space-y-3 lg:sticky lg:top-20 lg:self-start">
+            <PasswordlessAuthWidget />
+
+            {isSignedIn && (
+              <>
+                <TradePanel
+                  marketId={marketId}
+                  modes={positionSelectorModes}
+                  onError={(error) => setTradeError(error.message)}
+                  onBuy={() => setTradeError(null)}
+                />
+
+                {tradeError ? (
+                  <div className="rounded-lg border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-100">
+                    {tradeError}
+                  </div>
+                ) : null}
+              </>
+            )}
+          </aside>
         </div>
-      </section>
-    </FunctionSpaceProvider>
+      </div>
+    </section>
   )
 }

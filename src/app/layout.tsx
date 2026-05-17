@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
+import "@functionspace/ui/src/styles/base.css"
 
 import { Header } from "@/components/Header"
-import "@functionspace/ui/src/styles/base.css"
+import { Footer } from "@/components/Footer"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )
