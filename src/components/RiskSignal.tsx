@@ -13,9 +13,7 @@ export function RiskSignal({ riskSignal }: RiskSignalProps) {
   return (
     <AaveProvider>
       <div className="mt-8 grid gap-6">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <AaveReserveInfo riskSignal={riskSignal} />
-        </div>
+        <AaveReserveInfo riskSignal={riskSignal} />
         <RiskSignalTradingWidget
           marketId={riskSignal.functionSpaceMarketId}
           positionSelectorModes={

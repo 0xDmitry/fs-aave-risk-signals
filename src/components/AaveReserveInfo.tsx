@@ -1,9 +1,6 @@
 import { chainId, evmAddress, useAaveMarket } from "@aave/react"
 
-import {
-  AAVE_V3_ETHEREUM_MARKET,
-  RESERVE_ADDRESSES,
-} from "@/config/aave-reserves"
+import { AAVE_V3_ETHEREUM_MARKET } from "@/config/aave-reserves"
 import type { RiskSignal } from "@/types/risk-signal"
 
 type AaveReserveInfoProps = {
@@ -19,7 +16,9 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
   if (loading) {
     return (
       <section className="bg-paper rounded-lg border border-line p-5">
-        <p className="text-muted text-sm">Loading live Aave reserve data...</p>
+        <p className="text-muted text-sm">
+          Loading live Aave V3 reserve data...
+        </p>
       </section>
     )
   }
@@ -28,7 +27,7 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
     return (
       <section className="bg-paper rounded-lg border border-line p-5">
         <p className="text-sm text-red-600">
-          Failed to load Aave reserve data.
+          Failed to load Aave V3 reserve data.
         </p>
       </section>
     )
@@ -36,14 +35,14 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
 
   const reserve = data?.supplyReserves.find((reserve) => {
     const address = reserve.underlyingToken.address.toLowerCase()
-    return address === RESERVE_ADDRESSES[riskSignal.reserveSymbol].toLowerCase()
+    return address === riskSignal.reserveAddress.toLowerCase()
   })
 
   if (!reserve) {
     return (
       <section className="bg-paper rounded-lg border border-line p-5">
         <p className="text-muted text-sm">
-          Reserve not found in Aave Ethereum market.
+          Reserve not found in Aave V3 Ethereum market.
         </p>
       </section>
     )
@@ -51,9 +50,7 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
 
   const isYieldMarket = riskSignal.type === "forward-yield"
 
-  const metricLabel = isYieldMarket
-    ? "Current supply APY"
-    : "Current utilization"
+  const metricLabel = isYieldMarket ? "Current APY" : "Current Utilization Rate"
 
   const metricValue = isYieldMarket
     ? reserve.supplyInfo.apy.formatted + " %"
@@ -65,14 +62,24 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
   )
 
   const context = isYieldMarket
-    ? "Live Aave V3 Ethereum USDC supply APY. This is the current yield signal behind the forward supply yield market."
-    : "Live Aave V3 Ethereum WETH utilization. This is the current reserve tightness signal behind the reserve stress market."
+    ? "Live Aave V3 Ethereum USDC APY. This is the current yield signal behind the forward supply yield market."
+    : "Live Aave V3 Ethereum WETH Utilization Rate. This is the current reserve tightness signal behind the reserve stress market."
 
   return (
     <section className="bg-paper rounded-lg border border-line p-5">
-      <p className="text-muted text-xs font-semibold uppercase tracking-[0.12em]">
-        Live Aave reserve context
-      </p>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <p className="text-muted text-xs font-semibold uppercase tracking-[0.12em]">
+          Live Aave V3 reserve metrics
+        </p>
+        <a
+          href={riskSignal.reservePageUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="text-muted text-xs font-semibold uppercase tracking-[0.12em] transition hover:text-ink"
+        >
+          View on Aave V3 ↗
+        </a>
+      </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-3">
         <div>
