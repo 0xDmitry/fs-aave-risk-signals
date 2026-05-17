@@ -18,6 +18,14 @@ export function Header() {
             </span>
           </span>
         </Link>
+        <a
+          href="https://github.com/0xDmitry/fs-aave-risk-signals"
+          target="_blank"
+          rel="noreferrer"
+          className="font-semibold text-ink underline decoration-slate-300 underline-offset-4 transition hover:text-signal hover:decoration-signal"
+        >
+          GitHub ↗
+        </a>
       </div>
     </header>
   )
