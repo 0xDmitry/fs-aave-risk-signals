@@ -8,7 +8,7 @@ export function Header() {
           href="/"
           className="group flex items-center gap-3 rounded-xl outline-none transition focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
         >
-          <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-ink to-slate-700 text-sm font-bold tracking-tight text-white shadow-sm ring-1 ring-white/20 transition group-hover:-translate-y-0.5 group-hover:shadow-md">
+          <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-ink to-slate-700 text-sm font-bold tracking-tight text-white shadow-sm ring-1 ring-white/20">
             ARS
           </span>
 

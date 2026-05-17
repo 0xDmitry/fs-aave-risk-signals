@@ -30,7 +30,7 @@ function RiskSignalCard({ marketId }: RiskSignalCardProps) {
   const { market, loading, error } = useMarket(marketId)
 
   return (
-    <div className="group block rounded-lg border border-line bg-white p-5 transition hover:border-ink hover:shadow-sm">
+    <div>
       {loading ? (
         <span className="fs-skeleton" />
       ) : error ? (

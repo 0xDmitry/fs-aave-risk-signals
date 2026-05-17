@@ -31,7 +31,7 @@ export function RiskSignals() {
             <Link
               key={riskSignal.functionSpaceMarketId}
               href={`/risk-signals/${riskSignal.slug}`}
-              className="block rounded-2xl outline-none transition hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
+              className="block outline-none transition hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2"
             >
               <RiskSignalCardWidget
                 marketId={riskSignal.functionSpaceMarketId}
