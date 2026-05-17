@@ -1,8 +1,7 @@
-import { FunctionSpaceProvider, useMarket } from "@functionspace/react"
+import { useMarket } from "@functionspace/react"
 import { MarketCard } from "@functionspace/ui/src/market/MarketCard"
 
-import { FUNCTIONSPACE_API_BASE_URL } from "@/config/function-space-markets"
-import { widgetTheme } from "@/theme/widget-theme"
+import { FunctionSpaceProvider } from "@/providers/FunctionSpaceProvider"
 
 type RiskSignalCardWidgetProps = {
   marketId: number
@@ -10,13 +9,7 @@ type RiskSignalCardWidgetProps = {
 
 export function RiskSignalCardWidget({ marketId }: RiskSignalCardWidgetProps) {
   return (
-    <FunctionSpaceProvider
-      config={{
-        baseUrl: FUNCTIONSPACE_API_BASE_URL,
-        autoAuthenticate: false,
-      }}
-      theme={widgetTheme}
-    >
+    <FunctionSpaceProvider>
       <RiskSignalCard marketId={marketId} />
     </FunctionSpaceProvider>
   )

@@ -1,15 +1,15 @@
 import { useState } from "react"
-import { FunctionSpaceProvider, useAuth } from "@functionspace/react"
+import { useAuth } from "@functionspace/react"
 import { ConsensusChart } from "@functionspace/ui/src/charts/ConsensusChart"
 import { MarketStats } from "@functionspace/ui/src/market/MarketStats"
 import { TradePanel } from "@functionspace/ui/src/trading/TradePanel"
 import { PasswordlessAuthWidget } from "@functionspace/ui/src/auth/PasswordlessAuthWidget"
 
 import {
-  FUNCTIONSPACE_API_BASE_URL,
-  FUNCTIONSPACE_DEMO_TRADING_BASE_URL,
-} from "@/config/function-space-markets"
-import { widgetTheme } from "@/theme/widget-theme"
+  FunctionSpaceProvider,
+  useFunctionSpaceAuthPersistence,
+} from "@/providers/FunctionSpaceProvider"
+import { FUNCTIONSPACE_DEMO_TRADING_BASE_URL } from "@/config/function-space-markets"
 
 type RiskSignalTradingWidgetProps = {
   marketId: number
@@ -21,14 +21,8 @@ export function RiskSignalTradingWidget({
   positionSelectorModes,
 }: RiskSignalTradingWidgetProps) {
   return (
-    <FunctionSpaceProvider
-      config={{
-        baseUrl: FUNCTIONSPACE_API_BASE_URL,
-        autoAuthenticate: false,
-      }}
-      theme={widgetTheme}
-    >
-      <RiskSignalTradingWidgetInner
+    <FunctionSpaceProvider>
+      <RiskSignalTrading
         marketId={marketId}
         positionSelectorModes={positionSelectorModes}
       />
@@ -36,7 +30,7 @@ export function RiskSignalTradingWidget({
   )
 }
 
-function RiskSignalTradingWidgetInner({
+function RiskSignalTrading({
   marketId,
   positionSelectorModes,
 }: RiskSignalTradingWidgetProps) {
@@ -44,6 +38,8 @@ function RiskSignalTradingWidgetInner({
 
   const { user, isAuthenticated } = useAuth()
   const isSignedIn = Boolean(isAuthenticated || user)
+
+  const { rememberUsername, forgetUsername } = useFunctionSpaceAuthPersistence()
 
   return (
     <section className="bg-header border-header rounded-xl border p-4 text-white shadow-sm sm:p-5">
@@ -69,7 +65,11 @@ function RiskSignalTradingWidgetInner({
           </div>
 
           <aside className="min-w-0 space-y-3 lg:sticky lg:top-20 lg:self-start">
-            <PasswordlessAuthWidget />
+            <PasswordlessAuthWidget
+              onLogin={(user) => rememberUsername(user.username)}
+              onSignup={(user) => rememberUsername(user.username)}
+              onLogout={forgetUsername}
+            />
 
             {isSignedIn && (
               <>
