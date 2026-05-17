@@ -2,7 +2,7 @@
 
 import { AaveProvider } from "@/providers/AaveProvider"
 import { RiskSignalTradingWidget } from "@/components/widgets/RiskSignalTradingWidget"
-import { AaveReserveInfo } from "@/components/AaveReserveInfo"
+import { AaveReserveStatus } from "@/components/AaveReserveStatus"
 import type { RiskSignal } from "@/types/risk-signal"
 
 type RiskSignalProps = {
@@ -13,7 +13,7 @@ export function RiskSignal({ riskSignal }: RiskSignalProps) {
   return (
     <AaveProvider>
       <div className="mt-8 grid gap-6">
-        <AaveReserveInfo riskSignal={riskSignal} />
+        <AaveReserveStatus riskSignal={riskSignal} />
         <RiskSignalTradingWidget
           marketId={riskSignal.functionSpaceMarketId}
           positionSelectorModes={

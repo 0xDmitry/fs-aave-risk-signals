@@ -1,19 +1,42 @@
-import { chainId, evmAddress, useAaveMarket } from "@aave/react"
+import {
+  chainId,
+  evmAddress,
+  useAaveMarket,
+  useSupplyAPYHistory,
+  TimeWindow,
+} from "@aave/react"
 
 import { AAVE_V3_ETHEREUM_MARKET } from "@/config/aave-reserves"
+import { calculateTimeWeightedAverageApy } from "@/lib/calculate-apy"
+import { formatUnits } from "@/lib/format"
 import type { RiskSignal } from "@/types/risk-signal"
 
 type AaveReserveInfoProps = {
   riskSignal: RiskSignal
 }
 
-export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
-  const { data, loading, error } = useAaveMarket({
+export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
+  const {
+    data: aaveMarket,
+    loading: marketLoading,
+    error: marketError,
+  } = useAaveMarket({
     address: evmAddress(AAVE_V3_ETHEREUM_MARKET),
     chainId: chainId(1),
   })
 
-  if (loading) {
+  const {
+    data: supplyApyHistory,
+    loading: supplyApyHistoryLoading,
+    error: supplyApyHistoryError,
+  } = useSupplyAPYHistory({
+    market: evmAddress(AAVE_V3_ETHEREUM_MARKET),
+    underlyingToken: evmAddress(riskSignal.reserveAddress),
+    chainId: chainId(1),
+    window: TimeWindow.LastSixMonths,
+  })
+
+  if (marketLoading || supplyApyHistoryLoading) {
     return (
       <section className="bg-paper rounded-lg border border-line p-5">
         <p className="text-muted text-sm">
@@ -23,7 +46,7 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
     )
   }
 
-  if (error) {
+  if (marketError || supplyApyHistoryError) {
     return (
       <section className="bg-paper rounded-lg border border-line p-5">
         <p className="text-sm text-red-600">
@@ -33,7 +56,7 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
     )
   }
 
-  const reserve = data?.supplyReserves.find((reserve) => {
+  const reserve = aaveMarket?.supplyReserves.find((reserve) => {
     const address = reserve.underlyingToken.address.toLowerCase()
     return address === riskSignal.reserveAddress.toLowerCase()
   })
@@ -48,28 +71,31 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
     )
   }
 
-  const isYieldMarket = riskSignal.type === "forward-yield"
-
-  const metricLabel = isYieldMarket ? "Current APY" : "Current Utilization Rate"
-
-  const metricValue = isYieldMarket
-    ? reserve.supplyInfo.apy.formatted + " %"
-    : reserve.borrowInfo?.utilizationRate.formatted + " %"
-
-  console.log(
-    "reserve.supplyInfo: ",
-    JSON.stringify(reserve.supplyInfo.apy.formatted),
+  const usdcAverageApy = calculateTimeWeightedAverageApy(
+    Array.isArray(supplyApyHistory) ? supplyApyHistory : [],
+    Date.UTC(2026, 4, 8, 0, 0, 0),
+    Math.max(Date.now(), Date.UTC(2026, 5, 7, 0, 0, 0)),
   )
 
-  const context = isYieldMarket
-    ? "Live Aave V3 Ethereum USDC APY. This is the current yield signal behind the forward supply yield market."
-    : "Live Aave V3 Ethereum WETH Utilization Rate. This is the current reserve tightness signal behind the reserve stress market."
+  const isYieldMarket = riskSignal.type === "forward-yield"
+
+  const metricLabel = isYieldMarket ? "Average APY" : "Current Utilization Rate"
+
+  const metricValue = isYieldMarket
+    ? usdcAverageApy
+      ? `${formatUnits(usdcAverageApy * BigInt(100), 27)} %`
+      : "-"
+    : `${reserve.borrowInfo?.utilizationRate.formatted} %`
+
+  const description = isYieldMarket
+    ? "Live Aave V3 Ethereum USDC 30-Day Average Supply APY (May 8 - June 6 2026)."
+    : "Live Aave V3 Ethereum WETH Reserve Utilization."
 
   return (
     <section className="bg-paper rounded-lg border border-line p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <p className="text-muted text-xs font-semibold uppercase tracking-[0.12em]">
-          Live Aave V3 reserve metrics
+          Live Aave V3 reserve status
         </p>
         <a
           href={riskSignal.reservePageUrl}
@@ -100,7 +126,7 @@ export function AaveReserveInfo({ riskSignal }: AaveReserveInfoProps) {
         </div>
       </div>
 
-      <p className="text-ink-muted mt-4 text-sm leading-6">{context}</p>
+      <p className="text-ink-muted mt-4 text-sm leading-6">{description}</p>
     </section>
   )
 }
