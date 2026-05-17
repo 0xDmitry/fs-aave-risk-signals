@@ -37,7 +37,7 @@ export default async function RiskSignalDetailPage({
   }
 
   return (
-    <main className="mx-auto max-w-6xl px-5 py-10">
+    <main className="mx-auto max-w-6xl py-10 md:px-5">
       <RiskSignal riskSignal={riskSignal} />
     </main>
   )

@@ -12,9 +12,9 @@ type RiskSignalProps = {
 export function RiskSignal({ riskSignal }: RiskSignalProps) {
   return (
     <AaveProvider>
-      <div className="my-12 grid gap-6">
+      <div className="my-3 grid gap-6 lg:my-12">
         <AaveReserveStatus riskSignal={riskSignal} />
-        <div className="min-h-[867.5px]">
+        <div className="min-h-[716px]">
           <RiskSignalTradingWidget
             marketId={riskSignal.functionSpaceMarketId}
             positionSelectorModes={
