@@ -68,6 +68,16 @@ class FunctionSpaceSourceResolverPlugin {
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://fs-engine-api.onrender.com/api/:path*",
+      },
+    ]
+  },
+
   transpilePackages: [
     "@functionspace/core",
     "@functionspace/react",
