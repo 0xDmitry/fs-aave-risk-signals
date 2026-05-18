@@ -42,7 +42,7 @@ function RiskSignalTrading({
   const { rememberUsername, forgetUsername } = useFunctionSpaceAuthPersistence()
 
   return (
-    <section className="bg-header border-header border p-3 text-white shadow-sm sm:p-4 md:rounded-xl lg:p-5">
+    <section className="bg-header border-header border p-3 text-white shadow-sm sm:rounded-xl sm:p-4 lg:p-5">
       <div className="space-y-4 lg:space-y-5">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4 lg:grid-cols-8">
           <div className="order-3 col-span-1 flex items-center justify-center md:order-1 md:col-span-1 lg:order-1 lg:col-span-1">

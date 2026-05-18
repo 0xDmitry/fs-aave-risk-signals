@@ -23,19 +23,15 @@ function RiskSignalCard({ marketId }: RiskSignalCardProps) {
   const { market, loading, error } = useMarket(marketId)
 
   return (
-    <div className="flex h-full flex-1 items-stretch justify-stretch [&>*]:flex [&>*]:flex-1">
+    <div className="fs-risk-signal-card flex h-full flex-1 items-stretch justify-stretch [&>*]:flex [&>*]:flex-1">
       {loading ? (
-        <span className="fs-risk-signal-cards-skeleton" />
+        <span className="fs-risk-signal-card-skeleton" />
       ) : error ? (
-        <span style={{ color: "var(--fs-negative)", fontSize: "0.75rem" }}>
-          Error
-        </span>
+        <span className="fs-risk-signal-card-error">Error</span>
       ) : market ? (
         <MarketCard market={market} />
       ) : (
-        <span style={{ color: "var(--fs-negative)", fontSize: "0.75rem" }}>
-          Error
-        </span>
+        <span className="fs-risk-signal-card-error">Error</span>
       )}
     </div>
   )

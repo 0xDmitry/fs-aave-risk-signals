@@ -1,7 +1,7 @@
 export function Hero() {
   return (
     <section className="border-b border-line bg-[radial-gradient(circle_at_top_left,rgba(182,80,158,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(46,186,198,0.14),transparent_38%),linear-gradient(to_bottom,#FFFFFF,#F1F1F3)]">
-      <div className="mx-auto flex min-h-[520px] max-w-7xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-[420px] max-w-7xl flex-col items-center justify-center px-4 py-16 text-center sm:min-h-[500px] sm:px-6 sm:py-20 lg:min-h-[560px] lg:px-8 lg:py-24">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal sm:text-sm">
           functionSPACE competition demo
         </p>

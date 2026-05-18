@@ -8,7 +8,7 @@ import { riskSignals } from "@/config/risk-signals"
 export function RiskSignals() {
   return (
     <section className="bg-panel">
-      <div className="mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+      <div className="mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal">
             markets
@@ -26,12 +26,12 @@ export function RiskSignals() {
           </p>
         </div>
 
-        <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 items-stretch justify-stretch gap-4 md:gap-6 lg:max-w-6xl lg:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 items-stretch justify-stretch gap-5 md:gap-7 lg:mt-14 lg:max-w-6xl lg:grid-cols-2 lg:gap-8">
           {riskSignals.map((riskSignal) => (
             <Link
               key={riskSignal.functionSpaceMarketId}
               href={`/risk-signals/${riskSignal.slug}`}
-              className="min-h-[403px] w-full items-stretch justify-stretch outline-none transition hover:-translate-y-1 [&>*]:flex [&>*]:flex-1 [&>*]:items-stretch [&>*]:justify-stretch"
+              className="w-full items-stretch justify-stretch outline-none transition hover:-translate-y-1 [&>*]:flex [&>*]:flex-1 [&>*]:items-stretch [&>*]:justify-stretch"
             >
               <RiskSignalCardWidget
                 marketId={riskSignal.functionSpaceMarketId}

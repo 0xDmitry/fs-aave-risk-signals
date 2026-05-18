@@ -38,7 +38,7 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
 
   if (marketLoading || supplyApyHistoryLoading) {
     return (
-      <section className="bg-paper min-h-[162px] border border-line p-5 md:rounded-xl">
+      <section className="bg-paper min-h-[162px] border border-line p-5 sm:rounded-xl">
         <p className="text-muted text-sm">
           Loading live Aave V3 reserve data...
         </p>
@@ -48,7 +48,7 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
 
   if (marketError || supplyApyHistoryError) {
     return (
-      <section className="bg-paper min-h-[162px] border border-line p-5 md:rounded-xl">
+      <section className="bg-paper min-h-[162px] border border-line p-5 sm:rounded-xl">
         <p className="text-sm text-red-600">
           Failed to load Aave V3 reserve data.
         </p>
@@ -63,7 +63,7 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
 
   if (!reserve) {
     return (
-      <section className="bg-paper min-h-[162px] border border-line p-5 md:rounded-xl">
+      <section className="bg-paper min-h-[162px] border border-line p-5 sm:rounded-xl">
         <p className="text-muted text-sm">
           Reserve not found in Aave V3 Ethereum market.
         </p>
@@ -92,7 +92,7 @@ export function AaveReserveStatus({ riskSignal }: AaveReserveInfoProps) {
     : "Live Aave V3 Ethereum WETH Reserve Utilization"
 
   return (
-    <section className="bg-paper min-h-[162px] border border-line p-5 md:rounded-xl">
+    <section className="bg-paper min-h-[162px] border border-line p-5 sm:rounded-xl">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <p className="text-muted text-xs font-semibold uppercase tracking-[0.12em]">
           Live Aave V3 reserve status

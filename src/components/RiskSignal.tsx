@@ -12,7 +12,7 @@ type RiskSignalProps = {
 export function RiskSignal({ riskSignal }: RiskSignalProps) {
   return (
     <AaveProvider>
-      <div className="my-3 grid gap-6 lg:my-12">
+      <div className="grid gap-5 sm:gap-6 lg:gap-8">
         <AaveReserveStatus riskSignal={riskSignal} />
         <div className="min-h-[716px]">
           <RiskSignalTradingWidget

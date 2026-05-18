@@ -3,7 +3,7 @@ import { RiskSignals } from "@/components/RiskSignals"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-panel">
+    <main className="bg-panel">
       <Hero />
       <RiskSignals />
     </main>
