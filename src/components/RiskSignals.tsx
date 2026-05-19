@@ -18,7 +18,7 @@ export function RiskSignals() {
             Two forward Aave V3 risk markets
           </h2>
 
-          <p className="text-ink-muted mt-4 text-base leading-7">
+          <p className="mt-4 text-base leading-7 text-ink-muted">
             Aave Risk Signals is a functionSPACE competition demo that turns
             Aave V3 reserve risk into two forecastable markets. Instead of
             showing only current protocol data, it asks users to express forward
@@ -31,7 +31,7 @@ export function RiskSignals() {
             <Link
               key={riskSignal.functionSpaceMarketId}
               href={`/risk-signals/${riskSignal.slug}`}
-              className="w-full items-stretch justify-stretch outline-none transition hover:-translate-y-1 [&>*]:flex [&>*]:flex-1 [&>*]:items-stretch [&>*]:justify-stretch"
+              className="items-stretch justify-stretch outline-none transition hover:-translate-y-1 [&>*]:flex [&>*]:h-full [&>*]:w-full [&>*]:flex-1 [&>*]:items-stretch [&>*]:justify-stretch"
             >
               <RiskSignalCardWidget
                 marketId={riskSignal.functionSpaceMarketId}
